@@ -1,21 +1,25 @@
 {
   "name": "scorpio",
   "version": "1.0.0",
-  "description": "scorpio",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youshoubianer/scorpio.git"
+  },
   "author": "you_shoubian@163.com",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/youshoubianer/scorpio/issues"
   },
   "homepage": "https://github.com/youshoubianer/scorpio#readme",
   "dependencies": {
-    "JSON": "^1.0.0",
-    "body-parser": "^1.15.2",
-    "casperjs": "^1.1.2",
-    "express": "^4.14.0",
-    "request": "^2.73.0"
+    "co": "^4.6.0",
+    "lodash": "^4.16.1",
+    "nightmare": "^2.7.0",
+    "request": "^2.75.0"
   }
 }
