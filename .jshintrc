@@ -1,0 +1,49 @@
+{
+    "asi": true,  //控制“缺少分号”的警告
+    
+    "boss": true,
+  
+    "lastsemic": false,  //检查一行代码最后声明后面的分号是否遗漏
+  
+    "bitwise": false, //禁用位运算符，位运算符在JavaScript中使用较少，经常是把&&错输成&
+    
+    "curly": true,  //循环或者条件语句必须使用花括号包围
+    
+    "eqeqeq": true, //强制使用三等号
+    
+    "esversion":3,  //ECMAScript 3 的规范，保证兼容老的浏览器
+    
+    "esversion":5,  //ECMAScript 5.1 的规范
+    
+    "esversion":6,  //ECMAScript 6 的规范，注意浏览器支不支持ES6
+    
+    "freeze": true, //禁止重写原生对象的原型，比如 Array ， Date
+    
+    "indent": true, //代码缩进
+    
+    "latedef": "nofunc",  //禁止定义之前使用变量，忽略 function 函数声明
+    
+    "newcap": true, //构造器函数首字母大写
+    
+    "strict": true, //严格模式
+    
+    "maxparams": 10, //最大参数
+    
+    "maxdepth": 4,  //最大嵌套
+    
+    "maxcomplexity": false,  //复杂度检测
+    
+    "quotmark": false,  //禁止单引号和双引号混用
+    
+    "undef": true,  //变量必须定义
+    
+    "unused": false, //变量必须使用
+    
+    "browser": true,  //预定义全局变量 document ， navigator ， FileReader 等
+    
+    "devel": true,  //定义用于调试的全局变量： console ， alert
+    
+    "jquery": true, //jQuery全局变量
+    
+    "node": true  //node全局变量
+}
