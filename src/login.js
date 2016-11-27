@@ -9,7 +9,7 @@ exports.login = function* (){
     .type('#loginform [name=p]',config.pwd)
     .click('#login_button')
     // .wait('.head-info h1 span')
-    .wait(5000)
+    .wait(config.loginWait)
     .evaluate(function(){
       return document.cookie
     })

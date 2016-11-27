@@ -6,10 +6,11 @@ module.exports = new Crawer()
 
 Crawer.prototype.getPage = function * () {
   let targetUrl = config.qzoneUrl + '/' + config.qq + '/' + config.mood
+  console.log('targetUrl>>>',targetUrl);
   let getPageInfo = yield nightmare
     .goto(targetUrl)
-    .wait('.layout-background')
-    // .wait(3000)
+    // .wait('.layout-background')
+    .wait(10000)
     .evaluate(function(){
       console.log('begin>>>');
       var frame = window.frames[0].document
@@ -36,3 +37,35 @@ Crawer.prototype.getPage = function * () {
     
   return getPageInfo
 }
+
+Crawer.prototype.getFeed = function*(){
+  let feadApi = 'https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=1509923165&ftype=0&sort=0&pos=0&num=20&replynum=100&callback=_preloadCallback&code_version=1&format=jsonp&need_private_comment=1';
+
+  if(config.cookie){
+    
+    let gtk = util.getGTK(config.cookieJson['skey']);
+    feadApi = feadApi + '&g_tk='+ gtk
+    console.log('getFeed gtk>>>',gtk,feadApi);
+
+    let data = yield nightmare.goto(feadApi)
+    console.log('data>>>',data.slice(0,100));
+
+  }
+  else{
+    console.log('找不到cookie！');
+    return false;
+  }  
+}
+
+function _preloadCallback(obj) {
+  console.log('obj>>>',typeof(obj));
+}
+
+
+
+
+
+
+
+
+

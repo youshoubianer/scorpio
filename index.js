@@ -8,8 +8,11 @@ co(function*(){
   //登录 获取cookie
   yield QzoneLogin.login()
   console.log('cookie>>>',config.cookie);
+  util.parseCookie(config.cookie);
+  
   
   //first page
-  let pageInfo = yield crawer.getPage()
-  console.log('first pageInfo>>>',pageInfo);
+  // let pageInfo = yield crawer.getPage()
+  let pageInfo = yield crawer.getFeed()
+  // console.log('first pageInfo>>>',pageInfo);
 })
