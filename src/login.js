@@ -13,8 +13,8 @@ exports.login = function* (){
     .evaluate(function(){
       return document.cookie
     })
-    .then(function (result) {
-      config.cookie = result
+    .then(function (cookie) {
+      config.cookie = cookie
     })
 
   return getCookie

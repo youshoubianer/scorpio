@@ -39,15 +39,18 @@ Crawer.prototype.getPage = function * () {
 }
 
 Crawer.prototype.getFeed = function*(){
-  let feadApi = 'https://h5.qzone.qq.com/proxy/domain/taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=1509923165&ftype=0&sort=0&pos=0&num=20&replynum=100&callback=_preloadCallback&code_version=1&format=jsonp&need_private_comment=1';
+  let feadApi = `http://taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=${config.qq}&pos=0&num=20`;
 
   if(config.cookie){
     
     let gtk = util.getGTK(config.cookieJson['skey']);
-    feadApi = feadApi + '&g_tk='+ gtk
+    feadApi = `${feadApi}&g_tk=${gtk}`;
     console.log('getFeed gtk>>>',gtk,feadApi);
 
-    let data = yield nightmare.goto(feadApi)
+    nightmare.goto(feadApi).then(function(req,res){
+      console.log('req>>>',req);
+      console.log('res>>>',res);
+    })
     console.log('data>>>',data.slice(0,100));
 
   }
@@ -59,6 +62,36 @@ Crawer.prototype.getFeed = function*(){
 
 function _preloadCallback(obj) {
   console.log('obj>>>',typeof(obj));
+}
+
+Crawer.prototype.fetchMood = function *() {
+  let feadApi = `http://taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6?uin=${config.qq}&pos=0&num=20`;
+
+  if(config.cookie){
+    let gtk = util.getGTK(config.cookieJson['p_skey']);
+    feadApi = `${feadApi}&g_tk=${gtk}`;
+    
+    let cookieJar = request.jar();
+    let cookieArray = config.cookie.split(';')
+    for(let key in config.cookieJson){
+      let item = `${key}=${config.cookieJson[key]}`
+      cookieJar.setCookie(item, feadApi)
+    }
+    
+    request({
+        method: 'GET',
+        uri: feadApi,
+        jar: cookieJar,
+        headers: {
+          'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36'
+        }
+    },
+    function(err, res, body) {
+        if (err) { return console.log(err) };
+        console.log(res.statusCode);
+        console.log(body);
+    });
+  }
 }
 
 

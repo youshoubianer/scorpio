@@ -9,10 +9,10 @@ co(function*(){
   yield QzoneLogin.login()
   console.log('cookie>>>',config.cookie);
   util.parseCookie(config.cookie);
-  
+  let moodMsgList = yield crawer.fetchMood();
   
   //first page
   // let pageInfo = yield crawer.getPage()
-  let pageInfo = yield crawer.getFeed()
+  // let pageInfo = yield crawer.getFeed()
   // console.log('first pageInfo>>>',pageInfo);
 })

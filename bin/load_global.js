@@ -5,7 +5,9 @@ global.config = require('../src/common/config.js')
 
 //依赖
 global.co = require('co')
-global.request = require('request')
+
+global.request = require('request').defaults({jar: true})
+
 global.util = require('../src/common/util.js')
 
 const Nightmare = require('nightmare')
