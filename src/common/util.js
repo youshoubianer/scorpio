@@ -11,7 +11,6 @@ Util.prototype.getGTK = function(p_skey){
   //  }
   // return hash & 2147483647;
   
-  
   var hashes = 5381
   for (var i = 0, len = p_skey.length;i < len;++i) {
     hashes += (hashes << 5) + p_skey.charAt(i).charCodeAt()
@@ -33,6 +32,5 @@ Util.prototype.parseCookie = function(cookie){
   config.cookieJson = cookieJson;
   return cookieJson;
 }
-
 
 

@@ -70,7 +70,7 @@ Crawer.prototype.fetchMood = function *() {
   if(config.cookie){
     let gtk = util.getGTK(config.cookieJson['p_skey']);
     feadApi = `${feadApi}&g_tk=${gtk}`;
-    
+    console.log(feadApi);
     let cookieJar = request.jar();
     let cookieArray = config.cookie.split(';')
     for(let key in config.cookieJson){

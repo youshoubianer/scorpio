@@ -2,3 +2,5 @@
 node_modules
 npm-debug.log
 src/common/config.js
+docs/
+src/schemes/
