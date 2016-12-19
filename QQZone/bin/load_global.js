@@ -10,7 +10,7 @@ global._ = require('lodash');
 require('../src/common/lodash_extends');
 
 const Nightmare = require('nightmare');
-global.nightmare = Nightmare({ 
+global.nightmare = new Nightmare({ 
   show: true,
   openDevTools: {
    mode: 'bottom'
