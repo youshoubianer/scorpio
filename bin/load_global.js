@@ -18,6 +18,7 @@ global.nightmare = Nightmare({
 });
 
 global.util = require('../src/common/util.js');
+global.querystring = require('querystring');
 
 //数据模型
 global.db = require('../src/common/db');
