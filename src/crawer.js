@@ -5,8 +5,8 @@ var Crawer = function(){}
 module.exports = new Crawer()
 
 Crawer.prototype.fetchMood = function *() {
-
   if(config.cookie){
+    
     let gtk = util.getGTK(config.cookieJson['p_skey']);
     let targetUrl = 'http://taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6';
     let params = {
@@ -15,13 +15,15 @@ Crawer.prototype.fetchMood = function *() {
       num: 20,
       g_tk: gtk,
     };
-    let page = 1
+    let page = 1;
+    
     while(page > 0){
-      params.pos = (page - 1) * page.num;
-      let currentPageData = yield Crawer.fetchUrl(targetUrl,params);
+      console.log('page>>>',page);
+      params.pos = (page - 1) * params.num;
+      let currentPageData = yield this.fetchUrl(targetUrl,params);
       console.log('currentPageData>>>',currentPageData);
       
-      currentPageData.msgList ? page++ : -1;
+      page = currentPageData.msgList ? page++ : -1;
     }
     
   }
@@ -29,19 +31,18 @@ Crawer.prototype.fetchMood = function *() {
 
 
 Crawer.prototype.fetchUrl = function *(targetUrl,params){
-  console.log('aaa');
-  return new Promiss(function (resolve, reject){
-    targetUrl += (targetUrl.indexOf('?') === -1 ? '?' : '') + querystring.stringify(params);
-    
-    console.log(targetUrl);
+  targetUrl += (targetUrl.indexOf('?') === -1 ? '?' : '') + querystring.stringify(params);
+  
+  console.log(targetUrl);
 
-    //set cookie to request
-    let cookieJar = request.jar();
-    let cookieArray = config.cookie.split(';')
-    for(let key in config.cookieJson){
-      let item = `${key}=${config.cookieJson[key]}`
-      cookieJar.setCookie(item, targetUrl)
-    }
+  //set cookie to request
+  let cookieJar = request.jar();
+  let cookieArray = config.cookie.split(';')
+  for(let key in config.cookieJson){
+    let item = `${key}=${config.cookieJson[key]}`
+    cookieJar.setCookie(item, targetUrl)
+  }
+  return new Promise(function (resolve, reject){
     request({
         method: 'GET',
         uri: targetUrl,

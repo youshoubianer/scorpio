@@ -6,6 +6,7 @@ const path = require('path')
 const sequelize = db;
 const schemesPath = __dirname + '/../schemes';
 
+
 fs
   .readdirSync(schemesPath)
   .filter(function(file) {

@@ -13,7 +13,7 @@ const Nightmare = require('nightmare');
 global.nightmare = new Nightmare({ 
   show: true,
   openDevTools: {
-   mode: 'bottom'
+   mode: 'right'
   }
 });
 
