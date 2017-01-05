@@ -26,7 +26,7 @@ const getNext = function *(){
 
 const work = function *(){
   let hasDone = yield models.scoQqInfo.find({where:{qq: config.qq}});
-  if(hasDone.status == 0){
+  if(!hasDone){
     let fetchStatus = yield crawer.fetchMood(config.qq);
     console.log('fetchStatus>>>',fetchStatus);
     if(fetchStatus.code == 0){

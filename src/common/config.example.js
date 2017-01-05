@@ -26,6 +26,6 @@ module.exports = {
   
   moodApi: 'http://taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6',
   
-  maxSuccessCount = 1000, //成功访问的最大qq数
+  maxSuccessCount : 1000, //成功访问的最大qq数
 
 }
