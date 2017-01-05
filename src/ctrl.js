@@ -44,7 +44,7 @@ const work = function *(){
   
   let nextQQ = yield getNext();
   let successCount = 0;
-  while(nextQQ && successCount < 1000){
+  while(nextQQ && successCount < config.maxSuccessCount){
     console.log('\n===================================================');
     console.log(`正在爬取 ${nextQQ.name} 的空间，qq:${nextQQ.qq}`);
     
@@ -72,8 +72,8 @@ const work = function *(){
       
       //set the forbidden qq status
       yield crawer.setScoQQ({
-        'qq': fetchStatus['usrinfo'].uin, 
-        'name': fetchStatus['usrinfo'].name, 
+        'qq': nextQQ.qq, 
+        'name': nextQQ.name, 
         'status' : 1
       });
       

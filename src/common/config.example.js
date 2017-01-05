@@ -5,15 +5,6 @@ module.exports = {
   
   qzoneUrl: 'http://user.qzone.qq.com',
   
-  blog: '2',      //日志
-  photo: '4',     //照片
-  mood: '311',    //说说
-  share: '202',   //分享
-  vedio: '847',   //视频
-  music: "305",   //音乐
-  msgboard: "334",//留言板
-  profile: '1',   //个人档
-  
   qq: '',
   pwd: '',
   
@@ -33,4 +24,8 @@ module.exports = {
     logging: console.log,
   }
   
+  moodApi: 'http://taotao.qq.com/cgi-bin/emotion_cgi_msglist_v6',
+  
+  maxSuccessCount = 1000, //成功访问的最大qq数
+
 }
