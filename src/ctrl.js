@@ -25,23 +25,26 @@ const getNext = function *(){
 }
 
 const work = function *(){
-  let fetchStatus = yield crawer.fetchMood(config.qq);
-  console.log('fetchStatus>>>',fetchStatus);
-  if(fetchStatus.code == 0){
-    yield crawer.setScoQQ({
-      'qq': config.qq, 
-      'status' : 1
-    });
-    console.log('种子qq爬取完毕，一切正常～ :)');
-  }
-  else{
-    console.log('种子qq爬取出错！！ :(');
-    process.exit(-1);
+  let hasDone = yield models.scoQqInfo.find({where:{qq: config.qq}});
+  if(hasDone.status == 0){
+    let fetchStatus = yield crawer.fetchMood(config.qq);
+    console.log('fetchStatus>>>',fetchStatus);
+    if(fetchStatus.code == 0){
+      yield crawer.setScoQQ({
+        'qq': config.qq, 
+        'status' : 1
+      });
+      console.log('种子qq爬取完毕，一切正常～ :)');
+    }
+    else{
+      console.log('种子qq爬取出错！！ :(');
+      process.exit(-1);
+    }
   }
   
   let nextQQ = yield getNext();
   let successCount = 0;
-  while(nextQQ && successCount < 100){
+  while(nextQQ && successCount < 1000){
     console.log('\n===================================================');
     console.log(`正在爬取 ${nextQQ.name} 的空间，qq:${nextQQ.qq}`);
     
@@ -49,6 +52,10 @@ const work = function *(){
     
     if(fetchStatus.code == 0){
       console.log(`完成对${nextQQ.name}的空间的访问～～`);
+      yield crawer.setScoQQ({
+        'qq': nextQQ.qq, 
+        'status' : 1
+      });
       nextQQ = yield getNext();
       successCount++;
       continue;
@@ -85,5 +92,6 @@ exports.begin = function * (){
   }
   
   yield work();
+  process.exit(0);
   
 }
