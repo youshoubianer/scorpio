@@ -14,7 +14,5 @@ module.exports =  new Sequelize(config.database.database, config.database.userna
     maxConnections: config.database.pool,
   },
   omitNull: true,
-  option:{
-    logging: config.database.logging,
-  }
+  logging: false,
 });

@@ -49,6 +49,20 @@ _.toCamel = function(name) {
     };
     return newName;
 };
+// 将object key change to snake_name
+_.toSnake = function(obj) {
+  for(let key in obj){
+    let name = "";
+    for( let i = 0, len = key.length; i< len ; i++){
+      name += key[i] >= 'A' && key[i] <= 'Z' ? '_'+key[i].toLowerCase() : key[i];
+    }
+    obj[name] = obj[key];
+    if(name.indexOf('_') != -1) {
+      delete obj[key];
+    }
+  }
+  return obj;
+};
 
 // 获取IP地址
 _.getIp = function(req) {
